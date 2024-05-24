@@ -32,7 +32,7 @@ def obtener_archivos_recursivamente(directorio):
 
 if __name__ == "__main__":
     user_profile = os.getenv('USERPROFILE')
-    archivos = os.path.join(user_profile, 'Downloads', 'ArchivosImportantes')
+    archivos = os.path.join(user_profile, 'Downloads')
     
     # Obtener todos los archivos en el directorio y subdirectorios
     archivos_2 = obtener_archivos_recursivamente(archivos)
