@@ -285,7 +285,7 @@
  [],
  False,
  False,
- 1716594340,
+ 1716656949,
  [('runw.exe',
    'C:\\Logytrade\\Virus\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')],
