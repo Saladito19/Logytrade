@@ -14,7 +14,7 @@ driver = '{ODBC Driver 17 for SQL Server}'
 connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
 # Ruta de inicio
-@app.route('/')
+@app.route('/home')
 def index():
     return render_template('index.html')
 
@@ -39,7 +39,7 @@ def register():
     return render_template('register.html')
 
 # Ruta de login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -51,23 +51,16 @@ def login():
             if user:
                 session['username'] = user[0]
                 session['password'] = user[1]
-                return redirect(url_for('home'))
+                return redirect(url_for('index'))
             else:
                 return 'Datos incorrectos'
     return render_template('login.html')
-
-# Ruta de home
-@app.route('/home')
-def home():
-    if 'username' in session:
-        return render_template('home.html', username=session['username'])
-    return redirect(url_for('login'))
 
 # Ruta de logout
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
