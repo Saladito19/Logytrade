@@ -13,11 +13,7 @@ driver = '{ODBC Driver 17 for SQL Server}'
 
 connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
-# Ruta de inicio
-@app.route('/home')
-def index():
-    return render_template('index.html')
-
+# region ACCESO Y REGISTRO
 # Ruta de registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -55,12 +51,29 @@ def login():
             else:
                 return 'Datos incorrectos'
     return render_template('login.html')
+# endregion
+
+# region INDEX RUTAS
+# Ruta de inicio
+@app.route('/home')
+def index():
+    return render_template('index.html')
 
 # Ruta de logout
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
+
+#Ruta de inventario plantilla
+@app.route('/inventario')
+def inventario():
+    with pyodbc.connect(connection_string) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Inventario")
+        inventario = cursor.fetchall()
+    return render_template('inventario.html', inventario=inventario)
+#endregion
 
 if __name__ == '__main__':
     app.run(debug=True)

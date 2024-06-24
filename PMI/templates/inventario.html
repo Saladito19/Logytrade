@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <!-- Enlace a CSS -->
+    <link rel="stylesheet" href="/static/tabla.css">
+    <!-- Enlace a Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <button class="btn btn-primary" onclick="Agregar()">Agregar</button><br><br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>MARCA</th>
+                    <th>MODELO</th>
+                    <th>MEMORIA</th>
+                    <th>ALMACENAMIENTO</th>
+                    <th>PROCESADOR</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dato in inventario %}
+                <tr>
+                    <td>{{ dato[0] }}</td>
+                    <td>{{ dato[1] }}</td>
+                    <td>{{ dato[2] }}</td>
+                    <td>{{ dato[3] }}</td>
+                    <td>{{ dato[4] }}</td>
+                    <td>{{ dato[5] }}</td>
+                    <td><a href="#" class="enlace-tabla">Editar</a></td>
+                    <td><a href="#" class="enlace-tabla">Eliminar</a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <!-- Función Agregar -->
+    <script>
+        function Agregar() {
+            window.location.href = "#";
+        }
+    </script>
+    <!-- Enlace a jQuery y Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
