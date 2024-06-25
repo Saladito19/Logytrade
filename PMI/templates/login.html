@@ -2,19 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background: #FF002E;
+            background: linear-gradient(to LEFT, #A6001E, #FF002E);
+        }
+        .bg{
+            background-image: url(/static/Image/FONDOLOGY.jpg);
+            background-position: center center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="post" action="{{ url_for('login') }}">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
-    <a href="{{ url_for('register') }}">¿No tienes cuenta? Crea una aquí</a>
+<div class="container w-75 bg-primary mt-5 rounded shadow">
+    <div class="row alingn-items-stretch">
+        <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+
+        </div>
+        
+        <div class="col bg-white p-5 rounded-end">
+            <div class="text-end">
+                <img src="/static/Image/logo.png" width="200" alt="">
+            </div>
+            <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+
+            <!---login--->
+            <form method="post" action="{{ url_for('login') }}">
+                <div class="mb-4">
+                    <label for="email" class="form-label">Correo electronico</label>
+                    <input type ="email" class="form-control" name="email">
+
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type ="password" class="form-control" name="password">
+                </div>
+                <div class="mb-4 form-check">
+                    <input type="checkbox" name = "connected" class="form-check-input">
+                    <label for="connected" class="form-check-label">Mantenerme conectado</label>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-outline-primary" Iniciar>Iniciar sesion</button>
+                </div>
+                <div class="my-3">
+                    <span>No tienes cuenta? <a href="{{ url_for('register') }}">Registrate aqui!</a></span>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+    <script src="/static/bootstrap.bundle.min.js"></script>
 </body>
 </html>

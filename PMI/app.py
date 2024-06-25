@@ -38,7 +38,7 @@ def register():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form['email']
         password = request.form['password']
         with pyodbc.connect(connection_string) as conn:
             cursor = conn.cursor()
