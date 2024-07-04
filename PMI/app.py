@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import pyodbc
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = '1980'
 
 # Configuración de la base de datos
 server = 'SSDD'
@@ -18,18 +18,18 @@ connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};UID={u
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
-        Confirmpassword = request.form['Confirmpassword'] 
+        confirm_password = request.form['confirm_password'] 
         with pyodbc.connect(connection_string) as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM USERS WHERE username=?", username)
+            cursor.execute("SELECT * FROM ACCESO WHERE email=?", email)
             user = cursor.fetchone()
             if user:
                 return 'Ya existe ese usuario'
-            if password != Confirmpassword:
+            if password != confirm_password:
                 return 'Contraseñas no coinciden'
-            cursor.execute("INSERT INTO USERS (username, pass) VALUES (?, ?)", username, password)
+            cursor.execute("EXEC AgregarAcceso @Correo = ?, @Contraseña = ?;", email, password)
             conn.commit()
         return redirect(url_for('login'))
     return render_template('register.html')
@@ -38,15 +38,15 @@ def register():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['email']
+        email = request.form['email']
         password = request.form['password']
         with pyodbc.connect(connection_string) as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM USERS WHERE username=? AND pass=?", username, password)
+            cursor.execute("SELECT * FROM ACCESO WHERE email=? AND pass=?", email, password)
             user = cursor.fetchone()
             if user:
-                session['username'] = user[0]
-                session['password'] = user[1]
+                session['email'] = user[1]
+                session['password'] = user[2]
                 return redirect(url_for('index'))
             else:
                 return 'Datos incorrectos'
@@ -62,7 +62,7 @@ def index():
 # Ruta de logout
 @app.route('/logout')
 def logout():
-    session.pop('username', None)
+    session.pop('email', None)
     return redirect(url_for('login'))
 
 #Ruta de inventario plantilla

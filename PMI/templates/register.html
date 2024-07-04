@@ -7,13 +7,13 @@
 <body>
     <h1>Register</h1>
     <form method="post" action="{{ url_for('register') }}">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-        <label for="Confirmpassword">Confirm Password:</label>
-        <input type="password" id="password" name="Confirmpassword" required>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="password" name="confirm_password" required>
         <br>
         <button type="submit">Register</button>
     </form>
